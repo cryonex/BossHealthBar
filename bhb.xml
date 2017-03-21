@@ -1,0 +1,91 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+                   ..\..\FrameXML\UI.xsd">
+
+	<Script file="bhb.lua" />
+	<Frame name="BHB_BossHealthFrame">
+		<Size><AbsDimension x="1024" y="50" /></Size>
+		<Anchors>
+			<Anchor point="BOTTOM" />
+		</Anchors>
+		<Frames>
+			<StatusBar name="BHB_BossHealthBar">
+				<Size><AbsDimension x="768" y="13" /></Size>
+				<!--<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="71" y="-37" /></Anchors>-->
+				<Anchors><Anchor point="BOTTOM" relativePoint="BOTTOM" x="0" y="105" /></Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture file="Interface\addons\BossHealthBar\bhb_overlay" setAllPoints="true">
+							<Size><AbsDimension x="768" y="13" /></Size>
+							<Anchors><Anchor point="TOPLEFT" relativeTo="$parent" /></Anchors>
+							<Color r="1" g="0" b="0" a="1" />
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString name="BHB_BossHealthString" font="Fonts\FRIZQT__.TTF" text="0" justifyH="LEFT" justifyV="MIDDLE">
+							<Size><AbsDimension x="768" y="13" /></Size>
+							<Anchors><Anchor point="CENTER" relativeTo="$parent" /></Anchors>
+							<Color r="1" g="1" b="1" a="1" />
+							<FontHeight val="10" />
+							<Shadow>
+								<Offset x="1" y="1" />
+								<Color r="0" g="0" b="0" />
+							</Shadow>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="BHB_BossNameString" font="Fonts\FRIZQT__.TTF" text="" justifyH="LEFT" justifyV="MIDDLE">
+							<Size><AbsDimension x="768" y="13" /></Size>
+							<Anchors><Anchor point="CENTER" relativeTo="$parent" y="16" /></Anchors>
+							<Color r="1" g="1" b="1" a="1" />
+							<FontHeight val="14" />
+							<Shadow>
+								<Offset x="1" y="1" />
+								<Color r="0" g="0" b="0" />
+							</Shadow>
+						</FontString>
+					</Layer>
+				</Layers>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar">
+					<Size><AbsDimension x="768" y="13" /></Size>
+				</BarTexture>
+				<BarColor r="0.5" g="0.1" b="0.05" />
+			</StatusBar>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				BHB_initBossHealthFrame()
+			</OnLoad>
+			<OnEvent>
+				BHB_bossEventHandler(self, event, ...)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<Frame name="BHB_BossHealthFrameYellow" frameStrata="LOW">
+		<Size><AbsDimension x="768" y="50" /></Size>
+		<Anchors>
+			<Anchor point="BOTTOM" />
+		</Anchors>
+		<Frames>
+			<StatusBar name="BHB_BossHealthBarYellow">
+				<Size><AbsDimension x="768" y="13" /></Size>
+				<Anchors><Anchor point="BOTTOM" relativePoint="BOTTOM" x="0" y="105" /></Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar">
+					<Size><AbsDimension x="768" y="13" /></Size>
+				</BarTexture>
+				<BarColor r="0.5" g="0.5" b="0.1" />
+			</StatusBar>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				BHB_initBossHealthFrameYellow()
+				self.TimeSinceLastUpdate = 0
+				self.TimeYellow = 0
+			</OnLoad>
+			<OnUpdate>
+				BHB_animateBossHealthBarYellow(self, elapsed)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>
