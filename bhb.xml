@@ -88,4 +88,11 @@
 			</OnUpdate>
 		</Scripts>
 	</Frame>
+  <Frame name="BHB_optionsPanel" hidden="false" parent="InterfaceOptionsFramePanelContainer">
+    <Scripts>
+      <OnLoad>
+        BHB_initOptionsFrame()
+      </OnLoad>
+    </Scripts>
+  </Frame>
 </Ui>

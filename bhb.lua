@@ -60,6 +60,8 @@ function BHB_initBossHealthFrame()
 	BHB_BossHealthFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	BHB_BossHealthFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
 	BHB_BossHealthFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+	BHB_BossHealthFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	BHB_BossHealthFrame:RegisterEvent("CINEMATIC_START")
 	BHB_BossHealthBar:SetMinMaxValues(0,100)
 	BHB_BossHealthFrame:Hide()
 end
@@ -79,6 +81,9 @@ function BHB_bossEventHandler(self, event, ...)
 		if etype == "SPELL_DAMAGE" and destGUID == bossGUID then
 			BHB_setBossHealth(BHB_getUpdatedBossHealth())
 		end
+	elseif event == "PLAYER_ENTERING_WORLD" or event == "CINEMATIC_START" then
+		BHB_BossHealthFrame:Hide()
+		BHB_BossHealthFrameYellow:Hide()
 	end
 end
 

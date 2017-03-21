@@ -1,0 +1,5 @@
+## Interface: 71500
+## Title: Boss Health Bar
+## Notes: A boss health bar
+bhb.lua
+bhb.xml
